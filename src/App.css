@@ -1,11 +1,6 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+  background-color: whitesmoke;
 }
 
 .App-header {
@@ -19,15 +14,14 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Header {
+  background-color: lightblue;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Wizard {
+  background-color: lightsalmon;
+}
+
+.Dashboard {
+  background-color: lightgreen;
 }
