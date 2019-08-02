@@ -49,7 +49,6 @@ export default class Wizard extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevState, this.state);
     if (
       this.state.name !== prevState.name ||
       this.state.address !== prevState.address ||

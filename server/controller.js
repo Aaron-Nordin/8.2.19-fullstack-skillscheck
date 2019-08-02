@@ -16,5 +16,5 @@ module.exports = {
     let db = req.app.get("db");
     let house = await db.add_house([name, address, city, state, zip]);
     res.status(201).send(house);
-  }
+  },
 };
