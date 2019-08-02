@@ -11,6 +11,7 @@ function App() {
         <Header/>
         <hr/>
         <Link to="/">Dashboard</Link>
+        <span>  </span>
         <Link to="/wizard">Wizard</Link>
         <hr/>
         {routes}

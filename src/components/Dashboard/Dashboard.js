@@ -28,6 +28,7 @@ export default class Dashboard extends Component {
     let houseMap = this.state.houses.map(house => (
       <div>
         <House key={house.id} house={house} />
+        <hr/>
       </div>
     ));
 

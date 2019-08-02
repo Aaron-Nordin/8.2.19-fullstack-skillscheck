@@ -16,7 +16,7 @@ massive(CONNECTION_STRING)
     );
   })
   .catch(err => {
-    console.log("can't conect to db");
+    console.log("can't conect to db", err);
   });
 
   //---------------------ENDPOINTS----------------------------
