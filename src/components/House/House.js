@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class House extends Component {
-    render() {
-        return (
-            <div>
-                House? House.
-            </div>
-        )
-    }
+export default function House(houseObj) {
+    return (
+        <div>
+            <h1>{JSON.stringify(houseObj.house)}</h1>
+        </div>
+    )
 }

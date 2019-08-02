@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import store, { CLEAR_STATE, INPUT_STATE } from "../../ducks/store";
+import axios from "axios";
 
 export default class Wizard extends Component {
   constructor() {
@@ -11,7 +13,8 @@ export default class Wizard extends Component {
       state: "",
       zipcode: 0
     };
-    this.cancel = this.cancel.bind(this);
+    // this.cancel = this.cancel.bind(this);
+    this.addHouse = this.addHouse.bind(this);
   }
 
   handleChange(e) {
@@ -20,13 +23,26 @@ export default class Wizard extends Component {
     });
   }
 
-  cancel() {
-    this.setState({
-      productImage: "",
-      productName: "",
-      productPrice: ""
+  clear = () => {
+    store.dispatch({
+      type: CLEAR_STATE,
+      payload: this.setState({
+        productImage: "",
+        productName: "",
+        productPrice: "",
+        zipcode: 0
+      })
     });
-  }
+  };
+
+  addHouse = () => {
+    store.dispatch({
+      type: INPUT_STATE,
+      payload: this.state
+    });
+    let reduxState = store.getState();
+    axios.post("/api/house", reduxState).catch(err => alert(err));
+  };
 
   render() {
     return (
@@ -59,8 +75,8 @@ export default class Wizard extends Component {
             onChange={e => this.handleChange(e)}
           />
           <div className="but-add-cancel">
-            <button onClick={this.cancel}>Clear</button>
-            {/* <button onClick={this.addNewProduct}>Add</button> */}
+            <button onClick={this.clear}>Clear</button>
+            <button onClick={this.addHouse}>Add</button>
           </div>
         </form>
         <Link to="/">Cancel</Link>

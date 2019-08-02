@@ -22,3 +22,4 @@ massive(CONNECTION_STRING)
   //---------------------ENDPOINTS----------------------------
 
   app.get("/api/house", controller.getHouses)
+  app.post("/api/house", controller.addHouse)

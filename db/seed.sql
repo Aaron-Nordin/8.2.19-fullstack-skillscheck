@@ -13,3 +13,13 @@ values
 ('Example', '123 Example St.', 'Orem', 'UT', 84444),
 ('Boring', '456 Picket Ave.', 'Mt.Boring', 'BR', 88888),
 ('Meh', '789 Meh-Main St.', 'Mehsville', 'MH', 00000);
+
+--ALTER TABLES
+alter table houses
+add image text;
+
+alter table houses
+add mortgage int;
+
+alter table houses
+add rent int;
