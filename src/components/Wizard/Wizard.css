@@ -1,0 +1,4 @@
+.Wizard {
+    display: flex;
+    flex-direction: column;
+}

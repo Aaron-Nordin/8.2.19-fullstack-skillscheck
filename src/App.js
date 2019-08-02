@@ -9,8 +9,10 @@ function App() {
     <HashRouter>
       <div className="App">
         <Header/>
+        <hr/>
         <Link to="/">Dashboard</Link>
         <Link to="/wizard">Wizard</Link>
+        <hr/>
         {routes}
       </div>
     </HashRouter>

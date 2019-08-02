@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import store, { CLEAR_STATE, INPUT_STATE } from "../../ducks/store";
 import axios from "axios";
 
+var randomColor = require("randomcolor");
+
 export default class Wizard extends Component {
   constructor() {
     super();
@@ -27,11 +29,13 @@ export default class Wizard extends Component {
     store.dispatch({
       type: CLEAR_STATE,
       payload: this.setState({
-        productImage: "",
-        productName: "",
-        productPrice: "",
+        name: "",
+        address: "",
+        city: "",
+        state: "",
         zipcode: 0
-      })
+      }),
+      color: ""
     });
   };
 
@@ -44,9 +48,22 @@ export default class Wizard extends Component {
     axios.post("/api/house", reduxState).catch(err => alert(err));
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevState, this.state);
+    if (
+      this.state.name !== prevState.name ||
+      this.state.address !== prevState.address ||
+      this.state.city !== prevState.city ||
+      this.state.state !== prevState.state ||
+      this.state.zipcode !== prevState.zipcode
+    ) {
+      this.setState({ color: randomColor() });
+    }
+  }
+
   render() {
     return (
-      <div>
+      <div style={{ backgroundColor: this.state.color }}>
         Wizardry, I'm in the Wizzy component
         <form onSubmit={e => e.preventDefault()}>
           <input
