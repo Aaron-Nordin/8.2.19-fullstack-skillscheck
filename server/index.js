@@ -1,5 +1,5 @@
 require("dotenv").config();
-const ctrl = require("../server/controller");
+const controller = require("../server/controller");
 const express = require("express");
 const massive = require("massive");
 
@@ -18,3 +18,7 @@ massive(CONNECTION_STRING)
   .catch(err => {
     console.log("can't conect to db");
   });
+
+  //---------------------ENDPOINTS----------------------------
+
+  app.get("/api/house", controller.getHouses)

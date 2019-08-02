@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import House from "../House/House";
 import { Link } from "react-router-dom";
+import axios from "axios"
 
 export default class Dashboard extends Component {
   constructor() {
@@ -9,6 +10,19 @@ export default class Dashboard extends Component {
       houses: []
     };
   }
+
+  componentDidMount() {
+    axios
+      .get("/api/house")
+      .then(res => {
+          console.log(res)
+        this.setState({
+          houses: res.data
+        });
+      })
+      .catch(err => alert(err));
+  }
+
 
   render() {
     let houseMap = this.state.houses.map(house => (
