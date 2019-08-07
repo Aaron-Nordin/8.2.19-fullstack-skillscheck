@@ -27,6 +27,8 @@ function reducer(state = initialState, action) {
       return { ...state, ...action.payload };
     case STATE_STEP_TWO:
       return { ...state, ...action.payload };
+    case STATE_STEP_THREE:
+      return { ...state, ...action.payload };
     default:
       return state;
   }
