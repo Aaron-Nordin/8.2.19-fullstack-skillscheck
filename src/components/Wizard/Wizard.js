@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import store, { CLEAR_STATE, INPUT_STATE } from "../../ducks/store";
 import axios from "axios";
 
@@ -13,8 +13,10 @@ export default class Wizard extends Component {
       address: "",
       city: "",
       state: "",
-      zipcode: 0
+      zipcode: 0,
+      toDashboard: false
     };
+
     // this.cancel = this.cancel.bind(this);
     this.addHouse = this.addHouse.bind(this);
   }
@@ -33,19 +35,24 @@ export default class Wizard extends Component {
         address: "",
         city: "",
         state: "",
-        zipcode: 0
+        zipcode: 0,
+        image: "",
+        rent: 0
       }),
-      color: ""
+      color: "",
+      toDashboard: false
     });
   };
 
   addHouse = () => {
+    let { name, address, city, state, zipcode, image, rent } = this.state;
     store.dispatch({
       type: INPUT_STATE,
-      payload: this.state
+      payload: { name, address, city, state, zipcode, image, rent }
     });
     let reduxState = store.getState();
     axios.post("/api/house", reduxState).catch(err => alert(err));
+    this.setState({ toDashboard: true });
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -54,13 +61,19 @@ export default class Wizard extends Component {
       this.state.address !== prevState.address ||
       this.state.city !== prevState.city ||
       this.state.state !== prevState.state ||
-      this.state.zipcode !== prevState.zipcode
+      this.state.zipcode !== prevState.zipcode ||
+      this.state.image !== prevState.image ||
+      this.state.rent !== prevState.rent
     ) {
       this.setState({ color: randomColor() });
     }
   }
 
   render() {
+    if (this.state.toDashboard === true) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div style={{ backgroundColor: this.state.color }}>
         Wizardry, I'm in the Wizzy component
@@ -90,9 +103,19 @@ export default class Wizard extends Component {
             placeholder="Zip Code"
             onChange={e => this.handleChange(e)}
           />
+          <input
+            name="image"
+            placeholder="Image URL"
+            onChange={e => this.handleChange(e)}
+          />
+          <input
+            name="rent"
+            placeholder="Recommended Monthly Rent"
+            onChange={e => this.handleChange(e)}
+          />
           <div className="but-add-cancel">
             <button onClick={this.clear}>Clear</button>
-            <button onClick={this.addHouse}>Add</button>
+            <button onClick={this.addHouse}>Complete</button>
           </div>
         </form>
         <Link to="/">Cancel</Link>

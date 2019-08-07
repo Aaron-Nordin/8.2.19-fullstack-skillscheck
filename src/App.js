@@ -1,3 +1,5 @@
+//INSTRUCTIONS ARE SAVED ON SIMULATION-2 REPOSITORY
+
 import React from 'react';
 import Header from './components/Header/Header';
 import {HashRouter, Link} from "react-router-dom"

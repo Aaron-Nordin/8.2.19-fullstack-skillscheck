@@ -23,3 +23,4 @@ massive(CONNECTION_STRING)
 
   app.get("/api/house", controller.getHouses)
   app.post("/api/house", controller.addHouse)
+  app.delete("/api/house/:id", controller.deleteHouse)

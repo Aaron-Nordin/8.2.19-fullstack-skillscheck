@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import House from "../House/House";
 import { Link } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 
 export default class Dashboard extends Component {
   constructor() {
@@ -9,13 +9,17 @@ export default class Dashboard extends Component {
     this.state = {
       houses: []
     };
+    this.deleteHouse = this.deleteHouse.bind(this);
   }
 
   componentDidMount() {
+    this.getHouses();
+  }
+
+  getHouses() {
     axios
       .get("/api/house")
       .then(res => {
-          console.log(res)
         this.setState({
           houses: res.data
         });
@@ -23,21 +27,23 @@ export default class Dashboard extends Component {
       .catch(err => alert(err));
   }
 
+  deleteHouse(id) {
+    axios.delete(`/api/house/${id}`).catch(() => alert("Can't Delete!"));
+    this.getHouses();
+  }
 
   render() {
     let houseMap = this.state.houses.map(house => (
-      <div>
-        <House key={house.id} house={house} />
-        <hr/>
+      <div key={house.id}>
+        <House house={house} deleteHouse={this.deleteHouse} />
+        <hr />
       </div>
     ));
 
     return (
       <div>
-        Dashboardry, I'm in the Dashy component
         <Link to="/wizard">Add New Property</Link>
         {houseMap}
-        <House />
       </div>
     );
   }
