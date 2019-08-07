@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import store, { CLEAR_STATE, INPUT_STATE } from "../../ducks/store";
-import axios from "axios";
+import store, { CLEAR_STATE, STATE_STEP_ONE } from "../../ducks/store";
 import { Link } from "react-router-dom";
 import randomColor from "randomcolor"
 
@@ -35,6 +34,14 @@ export default class StepOne extends Component {
       }),
     });
   };
+
+  next = () => {
+      let {name, address, city, state, zipcode} = this.state
+      store.dispatch({
+          type: STATE_STEP_ONE,
+          payload: {name, address, city, state, zipcode}
+      })
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (
@@ -81,7 +88,7 @@ export default class StepOne extends Component {
           />
           <button onClick={this.clear}>Clear</button>
           <Link to="/wizard/step2">
-              <button>Next</button>
+              <button onClick={this.next}>Next</button>
           </Link>
         </form>
         <Link to="/">

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import store, { CLEAR_STATE, INPUT_STATE } from "../../ducks/store";
+import store, {
+  CLEAR_STATE,
+  STATE_STEP_THREE
+} from "../../ducks/store";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import randomColor from "randomcolor";
@@ -8,11 +11,7 @@ export default class StepThree extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      address: "",
-      city: "",
-      state: "",
-      zipcode: 0,
+      rent: 0,
       toDashboard: false,
       color: ""
     };
@@ -29,12 +28,6 @@ export default class StepThree extends Component {
     store.dispatch({
       type: CLEAR_STATE,
       payload: this.setState({
-        name: "",
-        address: "",
-        city: "",
-        state: "",
-        zipcode: 0,
-        image: "",
         rent: 0
       }),
       toDashboard: false
@@ -42,10 +35,10 @@ export default class StepThree extends Component {
   };
 
   addHouse = () => {
-    let { name, address, city, state, zipcode, image, rent } = this.state;
+    let { rent } = this.state;
     store.dispatch({
-      type: INPUT_STATE,
-      payload: { name, address, city, state, zipcode, image, rent }
+      type: STATE_STEP_THREE,
+      payload: { rent }
     });
     let reduxState = store.getState();
     axios.post("/api/house", reduxState).catch(err => alert(err));

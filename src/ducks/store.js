@@ -7,7 +7,7 @@ const initialState = {
   state: "",
   zipcode: 0,
   image: "",
-  rent: 0
+  rent: 0 
 };
 
 export const CLEAR_STATE = "CLEAR_STATE";
