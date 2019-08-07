@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import store, {
-  CLEAR_STATE,
-  STATE_STEP_THREE
-} from "../../ducks/store";
+import store, { CLEAR_STATE, STATE_STEP_THREE } from "../../ducks/store";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import randomColor from "randomcolor";
@@ -15,7 +12,7 @@ export default class StepThree extends Component {
       toDashboard: false,
       color: ""
     };
-    this.addHouse = this.addHouse.bind(this);
+    // this.addHouse = this.addHouse.bind(this);
   }
 
   handleChange(e) {

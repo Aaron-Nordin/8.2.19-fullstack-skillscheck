@@ -5,7 +5,7 @@ const initialState = {
   address: "",
   city: "",
   state: "",
-  zipcode: 0,
+  zip: 0,
   image: "",
   rent: 0 
 };

@@ -3,7 +3,6 @@ import store, { CLEAR_STATE, STATE_STEP_TWO } from "../../ducks/store";
 import { Link } from "react-router-dom";
 import randomColor from "randomcolor";
 
-
 export default class StepTwo extends Component {
   constructor() {
     super();
@@ -30,11 +29,11 @@ export default class StepTwo extends Component {
   };
 
   next = () => {
-      store.dispatch({
-          type: STATE_STEP_TWO,
-          payload: {image: this.state.image}
-      })
-  }
+    store.dispatch({
+      type: STATE_STEP_TWO,
+      payload: { image: this.state.image }
+    });
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (
