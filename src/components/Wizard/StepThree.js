@@ -8,11 +8,11 @@ export default class StepThree extends Component {
   constructor() {
     super();
     this.state = {
+      mortgage: 0,
       rent: 0,
       toDashboard: false,
       color: ""
     };
-    // this.addHouse = this.addHouse.bind(this);
   }
 
   handleChange(e) {
@@ -25,6 +25,7 @@ export default class StepThree extends Component {
     store.dispatch({
       type: CLEAR_STATE,
       payload: this.setState({
+        mortgage: 0,
         rent: 0
       }),
       toDashboard: false
@@ -32,13 +33,16 @@ export default class StepThree extends Component {
   };
 
   addHouse = () => {
-    let { rent } = this.state;
+    let { mortgage, rent } = this.state;
     store.dispatch({
       type: STATE_STEP_THREE,
-      payload: { rent }
+      payload: { mortgage, rent }
     });
     let reduxState = store.getState();
-    axios.post("/api/house", reduxState).catch(err => alert(err));
+    axios
+      .post("/api/house", reduxState)
+      .catch(err => alert(err))
+      .then(this.clear());
     this.setState({ toDashboard: true });
   };
 
@@ -64,9 +68,15 @@ export default class StepThree extends Component {
     return (
       <div style={{ backgroundColor: this.state.color }}>
         <form onSubmit={e => e.preventDefault()}>
+          <h4>Recommended Rent: ${this.state.mortgage * 1.2}</h4>
+          <input
+            name="mortgage"
+            placeholder="Monthly Mortgage Amount"
+            onChange={e => this.handleChange(e)}
+          />
           <input
             name="rent"
-            placeholder="Recommended Monthly Rent"
+            placeholder="Desired Monthly Rent"
             onChange={e => this.handleChange(e)}
           />
           <button onClick={this.clear}>Clear</button>

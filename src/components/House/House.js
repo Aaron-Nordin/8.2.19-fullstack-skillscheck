@@ -10,7 +10,8 @@ export default class House extends Component {
           <h4>{this.props.house.city}</h4>
           <h4>{this.props.house.state}</h4>
           <h4>{this.props.house.zip}</h4>
-          <h4>{this.props.house.image}</h4>
+          <img src={this.props.house.image} alt="house"/>
+          <h4>{this.props.house.mortgage}</h4>
           <h4>{this.props.house.rent}</h4>
         </div>
         <button onClick={() => this.props.deleteHouse(this.props.house.id)}>
